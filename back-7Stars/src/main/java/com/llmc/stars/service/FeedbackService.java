@@ -26,4 +26,8 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
+    public List<Feedback> searchFeedback(String nomeSearch){
+        return feedbackRepository.findFeedbackByNomeAvaliadoContaining(nomeSearch);
+    }
+
 }

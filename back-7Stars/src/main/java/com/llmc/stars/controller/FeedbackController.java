@@ -31,4 +31,9 @@ public class FeedbackController {
         return feedbackService.getAllFeedback();
     }
 
+    @GetMapping("/feedback/search")
+    private List<Feedback> searchFeedback(@RequestParam String nome){
+        return feedbackService.searchFeedback(nome);
+    }
+
 }
