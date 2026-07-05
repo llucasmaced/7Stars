@@ -1,4 +1,4 @@
-package com.llmc._stars.model;
+package com.llmc.stars.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

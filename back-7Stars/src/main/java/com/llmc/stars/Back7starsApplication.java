@@ -1,4 +1,4 @@
-package com.llmc._stars;
+package com.llmc.stars;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

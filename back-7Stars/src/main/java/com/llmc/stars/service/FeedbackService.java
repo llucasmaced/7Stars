@@ -1,8 +1,8 @@
-package com.llmc._stars.service;
+package com.llmc.stars.service;
 
-import com.llmc._stars.model.Feedback;
-import com.llmc._stars.model.dto.FeedbackDto;
-import com.llmc._stars.repository.FeedbackRepository;
+import com.llmc.stars.model.Feedback;
+import com.llmc.stars.model.dto.FeedbackDto;
+import com.llmc.stars.repository.FeedbackRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

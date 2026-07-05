@@ -1,4 +1,4 @@
-package com.llmc._stars;
+package com.llmc.stars;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

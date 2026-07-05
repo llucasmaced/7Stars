@@ -1,8 +1,8 @@
-package com.llmc._stars.controller;
+package com.llmc.stars.controller;
 
-import com.llmc._stars.model.Feedback;
-import com.llmc._stars.model.dto.FeedbackDto;
-import com.llmc._stars.service.FeedbackService;
+import com.llmc.stars.model.Feedback;
+import com.llmc.stars.model.dto.FeedbackDto;
+import com.llmc.stars.service.FeedbackService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
