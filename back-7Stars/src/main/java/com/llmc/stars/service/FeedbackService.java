@@ -18,7 +18,7 @@ public class FeedbackService {
 
 
     public void publicarFeedback(FeedbackDto data){
-        Feedback feedback = new Feedback(data.nomeCriador(), data.emailCriador(), data.nomeAvaliado(), data.InstagramAvaliado(), data.Categoria(), data.nota(), data.comentario());
+        Feedback feedback = new Feedback(data.nomeCriador(), data.emailCriador(), data.nomeAvaliado(), data.instagramAvaliado(), data.categoria(), data.nota(), data.comentario());
         feedbackRepository.save(feedback);
     }
 
