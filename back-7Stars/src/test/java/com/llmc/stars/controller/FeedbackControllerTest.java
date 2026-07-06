@@ -7,6 +7,8 @@ import com.llmc.stars.service.FeedbackService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -57,33 +59,35 @@ class FeedbackControllerTest {
 
     @Test
     void getAllFeedbackRetornaFeedbacks() throws Exception {
-        when(feedbackService.getAllFeedback()).thenReturn(List.of(
+        PageRequest pageable = PageRequest.of(0, 10);
+        when(feedbackService.getAllFeedback(10, 0)).thenReturn(new PageImpl<>(List.of(
                 new Feedback("Lucas", "lucas@email.com", "Maria", "@maria", "Atendimento", 5, "Excelente")
-        ));
+        ), pageable, 1));
 
         mockMvc.perform(get("/api/feedback"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nomeCriador").value("Lucas"))
-                .andExpect(jsonPath("$[0].emailCriador").value("lucas@email.com"))
-                .andExpect(jsonPath("$[0].nomeAvaliado").value("Maria"))
-                .andExpect(jsonPath("$[0].instagramAvaliado").value("@maria"))
-                .andExpect(jsonPath("$[0].categoria").value("Atendimento"))
-                .andExpect(jsonPath("$[0].nota").value(5))
-                .andExpect(jsonPath("$[0].comentario").value("Excelente"));
+                .andExpect(jsonPath("$.content[0].nomeCriador").value("Lucas"))
+                .andExpect(jsonPath("$.content[0].emailCriador").value("lucas@email.com"))
+                .andExpect(jsonPath("$.content[0].nomeAvaliado").value("Maria"))
+                .andExpect(jsonPath("$.content[0].instagramAvaliado").value("@maria"))
+                .andExpect(jsonPath("$.content[0].categoria").value("Atendimento"))
+                .andExpect(jsonPath("$.content[0].nota").value(5))
+                .andExpect(jsonPath("$.content[0].comentario").value("Excelente"));
 
-        verify(feedbackService).getAllFeedback();
+        verify(feedbackService).getAllFeedback(10, 0);
     }
 
     @Test
     void searchFeedbackRetornaFeedbacksFiltradosPorNome() throws Exception {
-        when(feedbackService.searchFeedback("Maria")).thenReturn(List.of(
+        PageRequest pageable = PageRequest.of(0, 10);
+        when(feedbackService.searchFeedback("Maria", 10, 0)).thenReturn(new PageImpl<>(List.of(
                 new Feedback("Lucas", "lucas@email.com", "Maria Silva", "@maria", "Atendimento", 5, "Excelente")
-        ));
+        ), pageable, 1));
 
         mockMvc.perform(get("/api/feedback/search").param("nome", "Maria"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nomeAvaliado").value("Maria Silva"));
+                .andExpect(jsonPath("$.content[0].nomeAvaliado").value("Maria Silva"));
 
-        verify(feedbackService).searchFeedback("Maria");
+        verify(feedbackService).searchFeedback("Maria", 10, 0);
     }
 }

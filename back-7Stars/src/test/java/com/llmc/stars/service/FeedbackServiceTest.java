@@ -9,6 +9,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -58,12 +61,14 @@ class FeedbackServiceTest {
                 new Feedback("Lucas", "lucas@email.com", "Maria", "@maria", "Atendimento", 5, "Excelente"),
                 new Feedback("Ana", "ana@email.com", "Joao", "@joao", "Produto", 4, "Bom")
         );
-        when(feedbackRepository.findAll()).thenReturn(feedbacks);
+        PageRequest pageable = PageRequest.of(0, 10);
+        Page<Feedback> feedbackPage = new PageImpl<>(feedbacks, pageable, feedbacks.size());
+        when(feedbackRepository.findAll(pageable)).thenReturn(feedbackPage);
 
-        List<Feedback> result = feedbackService.getAllFeedback();
+        Page<Feedback> result = feedbackService.getAllFeedback(10, 0);
 
-        assertThat(result).isEqualTo(feedbacks);
-        verify(feedbackRepository).findAll();
+        assertThat(result).isEqualTo(feedbackPage);
+        verify(feedbackRepository).findAll(pageable);
     }
 
     @Test
@@ -71,11 +76,13 @@ class FeedbackServiceTest {
         List<Feedback> feedbacks = List.of(
                 new Feedback("Lucas", "lucas@email.com", "Maria Silva", "@maria", "Atendimento", 5, "Excelente")
         );
-        when(feedbackRepository.findFeedbackByNomeAvaliadoContaining("Maria")).thenReturn(feedbacks);
+        PageRequest pageable = PageRequest.of(0, 10);
+        Page<Feedback> feedbackPage = new PageImpl<>(feedbacks, pageable, feedbacks.size());
+        when(feedbackRepository.findFeedbackByNomeAvaliadoContaining("Maria", pageable)).thenReturn(feedbackPage);
 
-        List<Feedback> result = feedbackService.searchFeedback("Maria");
+        Page<Feedback> result = feedbackService.searchFeedback("Maria", 10, 0);
 
-        assertThat(result).isEqualTo(feedbacks);
-        verify(feedbackRepository).findFeedbackByNomeAvaliadoContaining("Maria");
+        assertThat(result).isEqualTo(feedbackPage);
+        verify(feedbackRepository).findFeedbackByNomeAvaliadoContaining("Maria", pageable);
     }
 }
