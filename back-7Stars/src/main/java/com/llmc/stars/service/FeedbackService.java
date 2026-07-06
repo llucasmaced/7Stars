@@ -3,6 +3,9 @@ package com.llmc.stars.service;
 import com.llmc.stars.model.Feedback;
 import com.llmc.stars.model.dto.FeedbackDto;
 import com.llmc.stars.repository.FeedbackRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +25,14 @@ public class FeedbackService {
         feedbackRepository.save(feedback);
     }
 
-    public List<Feedback> getAllFeedback(){
-        return feedbackRepository.findAll();
+    public Page<Feedback> getAllFeedback(int size, int page){
+        Pageable pageable = (Pageable) PageRequest.of(page, size);
+        return feedbackRepository.findAll(pageable);
     }
 
-    public List<Feedback> searchFeedback(String nomeSearch){
-        return feedbackRepository.findFeedbackByNomeAvaliadoContaining(nomeSearch);
+    public Page<Feedback> searchFeedback(String nomeSearch, int size, int page){
+        Pageable pageable = (Pageable) PageRequest.of(page, size);
+        return feedbackRepository.findFeedbackByNomeAvaliadoContaining(nomeSearch, pageable);
     }
 
 }

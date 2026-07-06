@@ -3,6 +3,7 @@ package com.llmc.stars.controller;
 import com.llmc.stars.model.Feedback;
 import com.llmc.stars.model.dto.FeedbackDto;
 import com.llmc.stars.service.FeedbackService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,13 +28,16 @@ public class FeedbackController {
     }
 
     @GetMapping("/feedback")
-    private List<Feedback> getAllFeedback(){
-        return feedbackService.getAllFeedback();
+    private Page<Feedback> getAllFeedback(@RequestParam(defaultValue = "10") int size,
+                                          @RequestParam(defaultValue = "0")int page){
+        return feedbackService.getAllFeedback(size, page);
     }
 
     @GetMapping("/feedback/search")
-    private List<Feedback> searchFeedback(@RequestParam String nome){
-        return feedbackService.searchFeedback(nome);
+    private Page<Feedback> searchFeedback(@RequestParam String nome,
+                                          @RequestParam(defaultValue = "10") int size,
+                                          @RequestParam(defaultValue = "0")int page) {
+        return feedbackService.searchFeedback(nome, size, page);
     }
 
 }
