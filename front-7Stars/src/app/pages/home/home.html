@@ -86,3 +86,22 @@
         </div>
     </section>
 </div>
+<div class="flex justify-center items-center gap-4 mt-8">
+  <button
+    (click)="paginaAnterior()"
+    [disabled]="page === 0"
+    class="px-4 py-2 bg-black text-white disabled:bg-gray-400">
+    Anterior
+  </button>
+
+  <span>
+    Página {{ page + 1 }} de {{ totalPages }}
+  </span>
+
+  <button
+    (click)="proximaPagina()"
+    [disabled]="page >= totalPages - 1"
+    class="px-4 py-2 bg-black text-white disabled:bg-gray-400">
+    Próxima
+  </button>
+</div>

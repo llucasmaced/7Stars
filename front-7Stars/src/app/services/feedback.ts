@@ -8,9 +8,16 @@ import { Feedback } from '../models/feedback/feedback';
 })  
 export class FeedbackService {
 
-    private readonly apiUrl = 'http://localhost:8080/api/feedback';
+    private readonly apiUrl = 'http://192.168.18.24:8080/api/feedback';
 
     constructor(private http: HttpClient) { }
+
+
+    listarPaginado(page: number, size: number) {
+        return this.http.get<any>(
+            `${this.apiUrl}?page=${page}&size=${size}`
+        );
+    }
 
     listar(): Observable<Feedback[]>{
         return this.http.get<Feedback[]>(this.apiUrl);
@@ -20,8 +27,8 @@ export class FeedbackService {
         return this.http.post<any>(this.apiUrl, feedback);
     }
 
-    buscar(nome: string){
-        return this.http.get<Feedback[]>(`${this.apiUrl}/search?nome=${nome}`);
+    buscar(nome: string, page: number, size: number){
+        return this.http.get<any>(`${this.apiUrl}/search?nome=${nome}&page=${page}&size=${size}`);
     }
 
 }
