@@ -21,15 +21,19 @@
                 <label for="Search">
                     <span class="sr-only"> Search </span>
 
-                    <div
-                        class="flex border-2 border-black shadow-[4px_4px_0_0] shadow-black focus-within:ring-2 focus-within:ring-black-300">
-                        <input type="search" id="Search"
-                            class="w-full border-none bg-white text-black focus:ring-0 sm:text-sm" />
+                    <div class="mx-auto max-w-5xl">
+                        <div
+                            class="flex overflow-hidden border-2 border-black bg-white shadow-[4px_4px_0_0] shadow-black">
 
-                        <button type="submit"
-                            class="bg-black px-4 py-2 text-xs/none font-bold tracking-wide uppercase hover:bg-black-400 focus:bg-black-400 focus:outline-0">
-                            Search
-                        </button>
+                            <input #campoBusca type="search" placeholder="Buscar empresa, produto ou pessoa..."
+                                class="w-full px-4 py-3 text-base text-black outline-none" (input)="buscar(campoBusca.value)" />
+
+                            <button type="button" (click)="buscar(campoBusca.value)"
+                                class="border-l-2 border-black bg-black px-6 py-3 font-semibold text-white transition hover:bg-yellow-500 hover:text-black">
+
+                                Buscar
+                            </button>
+                        </div>
                     </div>
                 </label>
             </div>
@@ -62,7 +66,7 @@
                                         class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
                                         <span
                                             class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                           <svg class="w-6 h-6 p-1 text-white dark:text-white" aria-hidden="true"
+                                            <svg class="w-6 h-6 p-1 text-white dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                 viewBox="0 0 18 20">
                                                 <path
@@ -70,7 +74,7 @@
                                             </svg>{{ feedback.nomeCriador }}
                                         </span>
                                         <span class="text-gray-400 inline-flex items-center leading-none text-sm">
-                                               {{ feedback.emailCriador}}
+                                            {{ feedback.emailCriador}}
                                         </span>
                                     </div>
                                 </div>

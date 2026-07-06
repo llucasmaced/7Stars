@@ -33,5 +33,15 @@ export class HomeComponent implements OnInit {
     return Array(nota).fill(0);
     }
 
-
+  buscar(nome: string): void {
+    this.feedbackService.buscar(nome).subscribe({
+      next: (dados) => {
+        console.log('Dados recebidos da busca:', dados);
+        this.feedbacks.set(dados);
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar feedbacks:', erro);
+      }
+    });
+  }
 }

@@ -20,4 +20,8 @@ export class FeedbackService {
         return this.http.post<any>(this.apiUrl, feedback);
     }
 
+    buscar(nome: string){
+        return this.http.get<Feedback[]>(`${this.apiUrl}/search?nome=${nome}`);
+    }
+
 }
