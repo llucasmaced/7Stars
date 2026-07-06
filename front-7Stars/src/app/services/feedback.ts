@@ -8,7 +8,7 @@ import { Feedback } from '../models/feedback/feedback';
 })  
 export class FeedbackService {
 
-    private readonly apiUrl = 'http://192.168.18.24:8080/api/feedback';
+    private readonly apiUrl = 'http://localhost:8080/api/feedback';
 
     constructor(private http: HttpClient) { }
 
