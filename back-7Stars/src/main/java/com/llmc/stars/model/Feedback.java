@@ -1,30 +1,37 @@
 package com.llmc.stars.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Entity(name = "feedback")
+@Entity
+@Table(name = "feedback")
 public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "nome_criador")
     private String nomeCriador;
 
+    @Column(name = "email_criador")
     private String emailCriador;
 
+    @Column(name = "nome_avaliado")
     private String nomeAvaliado;
 
+    @Column(name = "instagram_avaliado")
     private String instagramAvaliado;
 
     private String categoria;
 
     private Integer nota;
 
-    private  String comentario;
+    private String comentario;
 
     public Feedback(String nomeCriador, String emailCriador, String nomeAvaliado, String instagramAvaliado, String categoria, Integer nota, String comentario) {
         this.nomeCriador = nomeCriador;
